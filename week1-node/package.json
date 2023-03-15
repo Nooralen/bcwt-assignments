@@ -1,18 +1,6 @@
 {
   "dependencies": {
-    "lodash": "^4.17.21"
-  },
-  "name": "week1-node",
-  "version": "1.0.0",
-  "main": "script.js",
-  "devDependencies": {},
-  "scripts": {
-    
-      "start": "nodemon script.js"
-    
-    
-  },
-  "author": "Noora",
-  "license": "ISC",
-  "description": ""
+    "express": "^4.18.2",
+    "pug": "^3.0.2"
+  }
 }
