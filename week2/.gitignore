@@ -119,3 +119,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+node_modules
+# ignore content of uploads folder
+uploads/*
+# except one (empty) file to have the folder in version control
+!uploads/.gitkeep
+# .env (dotenv) is used to store sensitive data such as database username and password. Add .env to .gitignore so that it won't be pushed to GitHub.
+.env

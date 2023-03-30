@@ -1,0 +1,25 @@
+GET http://localhost:3000/cat
+
+GET http://localhost:3000/cat/3
+
+POST http://localhost:3000/cat
+Content-Type: application/json
+
+{
+    "name": "Mittens",
+    "breed": "Siamese",
+    "color": "gray",
+    "age": 2
+}
+
+PUT http://localhost:3000/cat
+Content-Type: application/json
+
+{
+    "name": "Mittens",
+    "breed": "Persian",
+    "color": "gray",
+    "age": 2
+}
+
+DELETE http://localhost:3000/cat

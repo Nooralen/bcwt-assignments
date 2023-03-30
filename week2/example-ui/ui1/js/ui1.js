@@ -12,11 +12,11 @@ const getCat = async () => {
     <li>
         <h2>${cat.name}</h2>
         <figure>
-            <img src="${cat.filename}" class="resp">
+        <img src="../../uploads/${cat.filename}" class="resp">
         </figure>
-        <p>Birthdate: ${cat.birthdate}</p>
+        <p>Birthdate: ${cat.birthdate.substring(0,10)}</p>
         <p>Weight: ${cat.weight}kg</p>
-        <p>Owner: ${user.name}</p>
+        <p>Owner: ${cat.ownername}</p>
     </li>
     `;
   }

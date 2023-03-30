@@ -11,7 +11,7 @@ const createCatCards = (cats) => {
   cats.forEach((cat) => {
     // create li with DOM methods
     const img = document.createElement('img');
-    img.src = url + '/' + cat.filename;
+    img.src = img.src = `../../uploads/${cat.filename}`;;
     img.alt = cat.name;
     img.classList.add('resp');
 
@@ -21,7 +21,7 @@ const createCatCards = (cats) => {
     h2.innerHTML = cat.name;
 
     const p1 = document.createElement('p');
-    p1.innerHTML = `Birthdate: ${cat.birthdate}`;
+    p1.innerHTML = `Birthdate: ${cat.birthdate.substring(0,10)}`;
 
     const p2 = document.createElement('p');
     p2.innerHTML = `Weight: ${cat.weight}kg`;
@@ -44,6 +44,7 @@ const createCatCards = (cats) => {
         method: 'DELETE',
       };
       try {
+        console.log(url + '/cat/' + cat.cat_id, fetchOptions);
         const response = await fetch(url + '/cat/' + cat.cat_id, fetchOptions);
         const json = await response.json();
         console.log('delete response', json);
