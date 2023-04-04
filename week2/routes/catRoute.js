@@ -3,6 +3,7 @@ const express = require('express');
 // catRoute
 const router = express.Router();
 const multer  = require('multer')
+const { body, validationResult } = require('express-validator');
 // piettää kuvalle vanhan nimen
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
