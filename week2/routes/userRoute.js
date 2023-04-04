@@ -3,7 +3,7 @@ const express = require('express');
 // userRoute
 const router = express.Router();
 const controller = require('../controllers/userController')
-
+const { body, validationResult } = require('express-validator');
 router.get('/', controller.getUserList);
 //Tietty käyttäjä
 router.get('/:id', controller.getUser);
