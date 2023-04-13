@@ -58,30 +58,51 @@ const addCat = async(cat) => {
     return;
   }
 };
-const updateCat = async(cat) => {
-  try {
-    const [result] = await pool.query('UPDATE wop_cat SET name=?, weight=?, owner=?, birthdate=? WHERE cat_id=?', [
-      cat.name,
-      cat.weight,
-      cat.owner,
-      cat.birthdate,
-      cat.id
-    ]);
-    return result
-  }catch (e) {
-    console.error("error", e.message)
-    return;
+const updateCat = async(cat, catId, user) => {
+  let sql;
+  const values = [
+    cat.name,
+    cat.weight,
+    user.role === 0 ? cat.owner : user.user_id,
+    cat.birthdate,
+    catId
+  ];
+  console.log(values);
+  if(user.role === 0){
+    sql = `UPDATE wop_cat SET name=?, weight=?, owner=?, birthdate=?
+    WHERE cat_id=?`
+  }else {
+    sql = `UPDATE wop_cat SET name=?, weight=?, owner=?, birthdate=?
+    WHERE cat_id=? AND owner=?`;
+    values.push(user.user_id);
   }
+  try{
+    const[rows] = await pool.execute(sql, values);
+    console.log(rows);
+    return rows;
+  }catch (e){
+    console.error('error', e.message);
+    throw new Error('sql update cat failed')
+
+  };
 }
-const deleteCat = async(id) => {
-  try {
-    const [result] = await pool.query('DELETE FROM wop_cat WHERE cat_id=?', [ id ]);
-    console.log(`Cat ${getCat(id).name} deleted!`);
-    return result
-  } catch (e) {
-    console.error("error", e.message)
-    return;
+const deleteCat = async(id, userId, UserRole) => {
+  let sql;
+  if(userRole === 0){
+    sql = `DELETE FROM wop_cat WHERE cat_id?`;
+
+  }else{
+    sql = `DELETE FROM wop_cat WHERE cat_id=? AND owner=?`;
   }
+  try{
+    const [rows] = await pool.query(sql, [id, userId]);
+    console.log(rows);
+    return rows;
+  }catch (e){
+    console.error('error', e.message);
+    throw new Error('sql delete cat failed');
+  }
+
 }
 module.exports = {
   cats, getCat, getAllCats, addCat, updateCat, deleteCat

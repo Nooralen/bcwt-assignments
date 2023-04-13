@@ -47,8 +47,19 @@ const getUser = async(id) => {
       return;
     }
 };
-  
+const getUserLogin = async (params) => {
+  try {
+    //console.log('getUserLogin params:', params);
+    const [rows] = await pool.execute(
+      'SELECT * FROM wop_user WHERE email = ?;',
+      [params]);
+    //console.log('getUserLogin rows:', rows);
+    return rows;
+  } catch (e) {
+    console.log('getUserLogin error:', e.message);
+  }
+};
 
 module.exports = {
-  users,getUser, getAllUsers, addUser
+  users,getUser, getAllUsers, addUser, getUserLogin
 };
