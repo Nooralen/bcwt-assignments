@@ -36,10 +36,11 @@ const getUser = async(id) => {
   const addUser = async(user) => {
     console.log(user);
     try {
-      const [result] = await pool.query('INSERT INTO wop_user (name, email, password, role) VALUES (?, ?, ?, 0)', [
-        user.body.name,
-        user.body.email,
-        user.body.passwd
+      const [result] = await pool.query('INSERT INTO wop_user (name, email, password, role) VALUES (?, ?, ?, ?)', [
+        user.name,
+        user.email,
+        user.passwd,
+        user.role,
       ]);
       return result;
     } catch (e) {
